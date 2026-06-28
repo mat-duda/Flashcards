@@ -26,6 +26,9 @@ data class Flashcard (
     var whenCreatedDate: Date,
 
     @Column
-    var authorId: Int
+    var userId: Int,
+
+    @Column
+    var deckId: Int
 
 )
