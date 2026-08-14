@@ -9,6 +9,5 @@ import org.springframework.stereotype.Repository
 interface FlashcardRepository : JpaRepository<Flashcard, Long> {
 
     fun findAllByUserId(userId: Long): List<Flashcard>
-    fun findByDeckId(deckId: Long): List<Flashcard>
-    fun findByUserId(userId: Long): List<Flashcard>
+    fun findByDeckId(deckId: Int): List<Flashcard>
 }
