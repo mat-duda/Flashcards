@@ -8,7 +8,6 @@ import org.springframework.stereotype.Repository
 @Repository
 interface UserRepository : JpaRepository<User, Long> {
 
-    fun getAll(): List<User>
-    fun getUserById(id: Long): User
+
 
 }

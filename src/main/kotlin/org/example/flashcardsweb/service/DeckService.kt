@@ -20,7 +20,7 @@ class DeckService(
     fun createDeck(deck: Deck): Deck
     = deckRepository.save(deck)
 
-    fun deleteDeck(deck: Deck)
-    = deckRepository.delete(deck)
+    fun deleteDeckById(deckId: Long)
+    = deckRepository.deleteById(deckId)
 
 }

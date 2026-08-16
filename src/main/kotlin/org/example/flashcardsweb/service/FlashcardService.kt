@@ -18,4 +18,8 @@ class FlashcardService(
     = flashcardRepository.save(flashcard)
     fun deleteFlashcardById(id: Long)
     = flashcardRepository.deleteById(id)
+
+
+    fun getFlashcardsByDeckId(id: Long): List<Flashcard>
+    = flashcardRepository.findByDeckId(id)
 }

@@ -32,4 +32,7 @@ class FlashcardController(
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     fun delete(@PathVariable id: Long) = flashcardService.deleteFlashcardById(id)
+
+    @GetMapping("/deck/{deckId}")
+    fun getFlashcardsByDeckId(@PathVariable("deckId") id: Long): List<Flashcard> = flashcardRepository.findByDeckId(id)
 }
