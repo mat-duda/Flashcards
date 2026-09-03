@@ -45,3 +45,9 @@ application.properties
 .env
 .env.local
 .env.production
+
+### Node ###
+node_modules/
+
+### Frontend (local only for now) ###
+frontend/
