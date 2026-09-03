@@ -5,6 +5,7 @@ import org.example.flashcardsweb.repository.UserRepository
 import org.example.flashcardsweb.service.UserService
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
@@ -22,9 +23,11 @@ class UserController (
     @GetMapping
     fun findAll(): List<User> = userRepository.findAll()
 
-    @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    fun register(@RequestBody user: User): User = userService.createUser(user)
+    @GetMapping("/{id}")
+    fun findUserById(@PathVariable id:Long): User
+    = userService.getUserById(id)
+
+
 
    /* @PostMapping
     fun login(@RequestBody )*/

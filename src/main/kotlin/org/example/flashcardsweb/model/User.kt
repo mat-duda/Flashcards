@@ -17,13 +17,13 @@ data class User(
     val id: Long? = null,
 
     @Column(unique = true)
-    var name: String,
+    var name: kotlin.String,
 
     @Column(unique = true)
     var email: String,
 
     @Column
-    var password: String,
+    var password: String?,
 
     @Column(nullable = true)
     var googleId: String? = null

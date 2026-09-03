@@ -1,5 +1,7 @@
 package org.example.flashcardsweb.security
 
+import io.jsonwebtoken.Claims
+import io.jsonwebtoken.JwtParser
 import io.jsonwebtoken.Jwts
 import io.jsonwebtoken.security.Keys
 import org.example.flashcardsweb.model.User
@@ -27,6 +29,19 @@ class JwtService( @Value("\${jwt.secret}")
             .expiration(Date(System.currentTimeMillis() + expirationMs ))
             .signWith(signingKey)
             .compact()
+    }
+
+    fun extractAllClaims(token: String): Claims {
+        return Jwts.parser()
+            .verifyWith(signingKey)
+            .build()
+            .parseSignedClaims(token)
+            .payload
+    }
+
+    fun getUserIdFromToken(token: String): Long {
+        val claims = extractAllClaims(token)
+        return claims.subject.toLong()
     }
 
 }
