@@ -34,6 +34,8 @@ dependencies {
 
     implementation("com.google.api-client:google-api-client:2.7.2")
 
+    implementation("io.github.open-spaced-repetition:fsrs:0.6.0")
+
 
     runtimeOnly("org.postgresql:postgresql")
     testImplementation("org.springframework.boot:spring-boot-starter-data-jpa-test")
