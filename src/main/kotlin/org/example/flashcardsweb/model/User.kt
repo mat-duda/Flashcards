@@ -17,7 +17,7 @@ data class User(
     val id: Long? = null,
 
     @Column(unique = true)
-    var name: kotlin.String,
+    var name: String,
 
     @Column(unique = true)
     var email: String,
