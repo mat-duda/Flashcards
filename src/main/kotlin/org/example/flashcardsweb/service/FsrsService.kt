@@ -61,7 +61,7 @@ class FsrsService(
         currentCard.due = nextCard.due
         currentCard.stability = nextCard.stability
         currentCard.difficulty = nextCard.difficulty
-        currentCard.step = nextCard.step
+        currentCard.step = nextCard.step ?: 0
         currentCard.lastReview = nextCard.lastReview
 
         return currentCard
