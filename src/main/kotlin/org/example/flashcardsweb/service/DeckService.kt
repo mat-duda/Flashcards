@@ -23,4 +23,11 @@ class DeckService(
     fun deleteDeckById(deckId: Long)
     = deckRepository.deleteById(deckId)
 
+    fun editDeckNameById(deckId: Long, newName: String): Deck{
+        val deck = deckRepository.findById(deckId).orElseThrow{ NoSuchElementException("Deck with id $deckId not found") }
+
+        deck.name = newName
+
+        return deckRepository.save(deck)
+    }
 }

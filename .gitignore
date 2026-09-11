@@ -49,5 +49,13 @@ application.properties
 ### Node ###
 node_modules/
 
-### Frontend (local only for now) ###
-frontend/
+### Frontend build output & cache ###
+frontend/dist/
+frontend/.vite/
+
+### H2 database files ###
+*.mv.db
+*.trace.db
+
+### Scratch ###
+test.kt

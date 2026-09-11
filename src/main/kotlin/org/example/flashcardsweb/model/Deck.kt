@@ -17,7 +17,7 @@ data class Deck (
     val id: Long? = null,
 
     @Column
-    val name: String,
+    var name: String,
 
     @Column
     val userId: Long,

@@ -26,5 +26,8 @@ data class User(
     var password: String?,
 
     @Column(nullable = true)
-    var googleId: String? = null
+    var googleId: String? = null,
+
+    @Column(nullable = false)
+    val createdAt: java.time.Instant = java.time.Instant.now()
 )

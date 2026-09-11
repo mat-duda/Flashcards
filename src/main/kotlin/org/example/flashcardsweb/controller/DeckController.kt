@@ -33,6 +33,11 @@ class DeckController(
     @ResponseStatus(HttpStatus.CREATED)
     fun create(@RequestBody deck: Deck): Deck = deckService.createDeck(deck)
 
+    @PutMapping("/{id}")
+    fun editDeckName(@PathVariable id: Long, @RequestBody updatedDeck: Deck):Deck {
+        return deckService.editDeckNameById(id,updatedDeck.name)
+    }
+
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     fun delete(@PathVariable id: Long) = deckService.deleteDeckById(id)

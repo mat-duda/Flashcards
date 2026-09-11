@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController
 
 
 import org.example.flashcardsweb.service.FsrsService
+import org.springframework.web.bind.annotation.PutMapping
 
 data class ReviewRequest(val rating: Int)
 
@@ -53,6 +54,11 @@ class FlashcardController(
     @GetMapping("/deck/{deckId}/study")
     fun getFlashcardsToStudy(@PathVariable("deckId") id: Long): List<Flashcard> {
         return flashcardRepository.findCardsToStudy(id)
+    }
+
+    @PutMapping("/{id}")
+    fun editFlashcardById(@PathVariable id: Long, @RequestBody flashcard: Flashcard): Flashcard {
+        return flashcardService.editFlashcardById(id, flashcard)
     }
 
     @PostMapping("/{id}/review")

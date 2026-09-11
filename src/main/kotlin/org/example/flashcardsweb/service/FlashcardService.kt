@@ -22,4 +22,11 @@ class FlashcardService(
 
     fun getFlashcardsByDeckId(id: Long): List<Flashcard>
     = flashcardRepository.findByDeckId(id)
+
+    fun editFlashcardById(id: Long, newFlashcard: Flashcard): Flashcard{
+        val flashcard = flashcardRepository.findById(id).orElseThrow{ NoSuchElementException("Flashcard not found") }
+        flashcard.frontText = newFlashcard.frontText
+        flashcard.backText = newFlashcard.backText
+        return flashcardRepository.save(flashcard)
+    }
 }
