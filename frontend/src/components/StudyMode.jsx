@@ -1,8 +1,6 @@
 import { useState } from 'react';
 import { submitReview } from '../api/flashcardApi';
 import { UndoIcon, EllipsisIcon } from './icons';
-import ReactMarkdown from 'react-markdown';
-import remarkGfm from 'remark-gfm';
 export default function StudyMode({ flashcards, deckName, onExit }) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [flipped, setFlipped] = useState(false);
@@ -78,14 +76,11 @@ export default function StudyMode({ flashcards, deckName, onExit }) {
           className="study-review-content"
           onClick={() => setFlipped(!flipped)}
         >
-          <div>
-            <div className="study-review-text">
-              <div className="markdown-content">
-                <ReactMarkdown remarkPlugins={[remarkGfm]}>
-                  {flipped ? card.backText : card.frontText}
-                </ReactMarkdown>
-              </div>
-            </div>
+          <div style={{ width: '100%' }}>
+            <div 
+              className="study-review-text tiptap-editor-content"
+              dangerouslySetInnerHTML={{ __html: flipped ? card.backText : card.frontText }}
+            />
             {!flipped && (
               <p className="study-review-hint">Tap to reveal answer</p>
             )}

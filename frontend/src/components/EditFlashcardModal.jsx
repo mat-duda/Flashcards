@@ -1,13 +1,11 @@
-import { useState, useRef } from 'react';
-import MarkdownToolbar from './MarkdownToolbar';
+import { useState } from 'react';
+import RichTextEditor from './RichTextEditor';
 
-export default function EditFlashcardModal({ flashcard, onEdited, onClose }) {
+export default function EditFlashcardModal({ flashcard, userId, onEdited, onClose }) {
   const [frontText, setFrontText] = useState(flashcard.frontText);
   const [backText, setBackText] = useState(flashcard.backText);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const frontRef = useRef(null);
-  const backRef = useRef(null);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -31,7 +29,7 @@ export default function EditFlashcardModal({ flashcard, onEdited, onClose }) {
 
   return (
     <div className="modal-overlay" onClick={onClose}>
-      <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+      <div className="modal-content modal-wide" onClick={(e) => e.stopPropagation()}>
         <button className="modal-close" onClick={onClose}>✕</button>
         <h2>Edit Flashcard</h2>
 
@@ -39,33 +37,13 @@ export default function EditFlashcardModal({ flashcard, onEdited, onClose }) {
 
         <form onSubmit={handleSubmit}>
           <div className="form-group">
-            <div className="form-label-row">
-              <label htmlFor="frontText">Front (Question)</label>
-              <MarkdownToolbar textareaRef={frontRef} value={frontText} onChange={setFrontText} />
-            </div>
-            <textarea
-              ref={frontRef}
-              id="frontText"
-              value={frontText}
-              onChange={(e) => setFrontText(e.target.value)}
-              required
-              rows={3}
-            />
+            <label>Front (Question)</label>
+            <RichTextEditor content={frontText} onChange={setFrontText} userId={userId} />
           </div>
 
           <div className="form-group">
-            <div className="form-label-row">
-              <label htmlFor="backText">Back (Answer)</label>
-              <MarkdownToolbar textareaRef={backRef} value={backText} onChange={setBackText} />
-            </div>
-            <textarea
-              ref={backRef}
-              id="backText"
-              value={backText}
-              onChange={(e) => setBackText(e.target.value)}
-              required
-              rows={3}
-            />
+            <label>Back (Answer)</label>
+            <RichTextEditor content={backText} onChange={setBackText} userId={userId} />
           </div>
 
           <button type="submit" className="btn-primary submit-btn" disabled={loading}>

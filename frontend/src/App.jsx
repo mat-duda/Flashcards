@@ -314,6 +314,7 @@ export default function App() {
       {showCreateCard && selectedDeck && (
         <CreateFlashcardModal
           deckId={selectedDeck.id}
+          userId={user.id}
           onCreated={handleCreateFlashcard}
           onClose={() => setShowCreateCard(false)}
         />
@@ -328,6 +329,7 @@ export default function App() {
       {editingFlashcard && (
         <EditFlashcardModal
           flashcard={editingFlashcard}
+          userId={user.id}
           onEdited={handleEditFlashcard}
           onClose={() => setEditingFlashcard(null)}
         />
