@@ -1,26 +1,22 @@
 package org.example.flashcardsweb.controller
 
-import org.example.flashcardsweb.AuthResponse
-import org.example.flashcardsweb.GoogleLoginRequest
-import org.example.flashcardsweb.LoginRequest
-import org.example.flashcardsweb.RegisterRequest
-import org.example.flashcardsweb.UserDto
+import org.example.flashcardsweb.dto.AuthResponse
+import org.example.flashcardsweb.dto.GoogleLoginRequest
+import org.example.flashcardsweb.dto.LoginRequest
+import org.example.flashcardsweb.dto.RegisterRequest
+import org.example.flashcardsweb.dto.UserDto
 import org.example.flashcardsweb.model.User
 import org.example.flashcardsweb.repository.UserRepository
 import org.example.flashcardsweb.security.GoogleTokenVerifier
 import org.example.flashcardsweb.security.JwtService
-import org.example.flashcardsweb.service.UserService
 import org.springframework.http.HttpStatus
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.http.ResponseEntity
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.ResponseStatus
 import org.springframework.web.bind.annotation.RestController
-import java.lang.String
 
 @RestController
 @RequestMapping("/api/auth")

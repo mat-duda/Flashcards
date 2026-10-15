@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+﻿@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
 :root {
   --font-family: 'Inter', sans-serif;
@@ -542,7 +542,7 @@ textarea {
 }
 
 .search-bar::before {
-  content: "🔍"; /* Simple fallback for icon */
+  content: "Ä‘Ĺşâ€ťĹ¤"; /* Simple fallback for icon */
   position: absolute;
   left: 14px;
   top: 50%;
@@ -1030,192 +1030,6 @@ textarea {
   padding: 0 1rem;
   color: var(--text-muted);
   font-size: 0.85rem;
-}
-
-.success-banner {
-  background: rgba(16, 185, 129, 0.08);
-  border: 1px solid rgba(16, 185, 129, 0.25);
-  color: var(--success-color);
-  padding: 0.85rem 1.25rem;
-  border-radius: var(--radius-md);
-  margin-bottom: 1.25rem;
-  font-size: 0.9rem;
-  font-weight: 500;
-}
-
-@media (max-width: 600px) {
-  .profile-header {
-    flex-direction: column;
-    text-align: center;
-  }
-
-  .profile-security-row {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 1rem;
-  }
-
-  .profile-card-actions {
-    flex-direction: column;
-  }
-
-  .profile-card-actions .btn-primary,
-  .profile-card-actions .btn-secondary {
-    width: 100%;
-  }
-}
-
-/* ====== AUTH PAGE ====== */
-.auth-wrapper {
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 2rem 1rem;
-  background: linear-gradient(135deg, #f0f4f8 0%, #e2e8f0 100%);
-}
-
-.auth-container {
-  width: 100%;
-  max-width: 420px;
-  background: var(--surface-color);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-lg);
-  border: 1px solid var(--border-color);
-  padding: 2.5rem 2rem;
-}
-
-.auth-header {
-  text-align: center;
-  margin-bottom: 2rem;
-}
-
-.auth-logo {
-  font-size: 3rem;
-  margin-bottom: 0.75rem;
-}
-
-.auth-header h1 {
-  font-size: 1.75rem;
-  font-weight: 700;
-  color: var(--text-color);
-  margin-bottom: 0.35rem;
-}
-
-.auth-header p {
-  color: var(--text-muted);
-  font-size: 0.95rem;
-}
-
-.auth-tabs {
-  display: flex;
-  border-bottom: 2px solid var(--border-color);
-  margin-bottom: 1.5rem;
-}
-
-.auth-tab {
-  flex: 1;
-  padding: 0.75rem;
-  border: none;
-  background: none;
-  font-family: var(--font-family);
-  font-size: 0.95rem;
-  font-weight: 500;
-  color: var(--text-muted);
-  cursor: pointer;
-  border-bottom: 2px solid transparent;
-  margin-bottom: -2px;
-  transition: var(--transition);
-}
-
-.auth-tab:hover {
-  color: var(--text-color);
-}
-
-.auth-tab.active {
-  color: var(--accent-color);
-  border-bottom-color: var(--accent-color);
-}
-
-.auth-footer {
-  text-align: center;
-  margin-top: 1.5rem;
-  font-size: 0.9rem;
-  color: var(--text-muted);
-}
-
-.auth-footer a {
-  color: var(--accent-color);
-  font-weight: 500;
-  cursor: pointer;
-  text-decoration: none;
-}
-
-.auth-footer a:hover {
-  text-decoration: underline;
-}
-
-/* ====== NAVBAR RIGHT ====== */
-.navbar-right {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-}
-
-.navbar-username {
-  font-size: 0.9rem;
-  font-weight: 500;
-  color: var(--text-color);
-}
-
-.btn-logout {
-  background: none;
-  border: 1px solid var(--border-color);
-  color: var(--text-muted);
-  font-family: var(--font-family);
-  font-size: 0.8rem;
-  font-weight: 500;
-  padding: 0.4rem 0.85rem;
-  border-radius: var(--radius-full);
-  cursor: pointer;
-  transition: var(--transition);
-}
-
-.btn-logout:hover {
-  border-color: var(--danger-color);
-  color: var(--danger-color);
-  background: rgba(239, 68, 68, 0.05);
-}
-
-@media (max-width: 600px) {
-  .auth-container {
-    padding: 2rem 1.25rem;
-  }
-
-  .navbar-username {
-    display: none;
-  }
-}
-
-/* ====== AUTH DIVIDER & GOOGLE ====== */
-.auth-divider {
-  display: flex;
-  align-items: center;
-  margin: 1.5rem 0;
-}
-
-.auth-divider::before,
-.auth-divider::after {
-  content: '';
-  flex: 1;
-  height: 1px;
-  background: var(--border-color);
-}
-
-.auth-divider span {
-  padding: 0 1rem;
-  color: var(--text-muted);
-  font-size: 0.85rem;
   font-weight: 500;
   text-transform: uppercase;
   letter-spacing: 0.05em;
@@ -1225,89 +1039,6 @@ textarea {
   display: flex;
   justify-content: center;
   margin-bottom: 0.5rem;
-}
-
-/* ================================================================
-   FIGMA REDESIGN — Main Decks & Review
-   ================================================================ */
-
-/* App shell */
-.app {
-  min-height: 100vh;
-  background: #CBD5E1;
-}
-
-/* Top bar */
-.topbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  width: 100%;
-}
-
-.tab-pill {
-  display: inline-flex;
-  padding: 8px 10px;
-  align-items: center;
-  background: #fff;
-  border-radius: 0 0 8px 0;
-  gap: 0;
-}
-
-.tab-item {
-  padding: 12px 24px;
-  border: none;
-  background: #fff;
-  font-family: 'Inter', sans-serif;
-  font-size: 1.15rem;
-  font-weight: 500;
-  cursor: pointer;
-  border-radius: 8px;
-  color: #000;
-  transition: background 0.2s;
-  line-height: 1.4;
-}
-
-.tab-item.active {
-  background: #F1F5F9;
-  border-radius: 10px;
-}
-
-.tab-item:hover:not(.active) {
-  background: #f8fafc;
-}
-
-/* Avatar in topbar */
-.topbar .avatar {
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-  background: #E2E8F0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 2rem;
-  font-weight: 400;
-  color: #0F172A;
-  cursor: pointer;
-  margin: 24px 40px 0 0;
-  flex-shrink: 0;
-}
-
-/* Main content area */
-.app-main {
-  padding: 24px 70px 48px;
-  max-width: 1440px;
-  margin: 0 auto;
-}
-
-/* Error banner */
-.error-banner {
-  background: #fef2f2;
-  color: #ef4444;
-  border: 1px solid #fecaca;
-  padding: 12px 16px;
-  border-radius: 8px;
   margin-bottom: 24px;
   font-size: 0.9375rem;
 }
@@ -1355,13 +1086,13 @@ textarea {
   pointer-events: none;
 }
 
-/* Deck grid — 3 columns */
+/* Deck grid Ă˘â‚¬â€ť 3 columns */
 .deck-grid {
   grid-template-columns: repeat(3, 1fr);
   gap: 24px;
 }
 
-/* Deck card — Figma coloured style */
+/* Deck card Ă˘â‚¬â€ť Figma coloured style */
 .deck-card {
   border-radius: 12.5px;
   padding: 20px 24px;
@@ -1467,7 +1198,7 @@ textarea {
   color: #000;
 }
 
-/* ---- Study / Review Mode — Figma ---- */
+/* ---- Study / Review Mode Ă˘â‚¬â€ť Figma ---- */
 
 .study-review-card {
   background: #E2E8F0;
@@ -1573,7 +1304,7 @@ textarea {
   font-weight: 400;
 }
 
-/* FSRS rating buttons — Figma colours */
+/* FSRS rating buttons Ă˘â‚¬â€ť Figma colours */
 .study-rating-buttons {
   display: flex;
   gap: 16px;
@@ -1587,7 +1318,7 @@ textarea {
   flex: 1;
   padding: 16px 28px;
   border: none;
-  border-radius: 10.8px;
+  border-radius: var(--radius-md);
   font-family: 'Inter', sans-serif;
   font-size: 1.1rem;
   font-weight: 500;
@@ -1605,9 +1336,9 @@ textarea {
   transform: translateY(0);
 }
 
-.study-rating-btn.bad     { background: #EF4444; }
+.study-rating-btn.bad     { background: var(--danger-color); }
 .study-rating-btn.hard    { background: #FDBA74; }
-.study-rating-btn.good    { background: #22C55E; }
+.study-rating-btn.good    { background: var(--success-color); }
 .study-rating-btn.perfect { background: #166534; }
 
 /* Study results */
@@ -1863,9 +1594,268 @@ textarea {
   display: inline-block;
   margin: 8px 0;
 }
-
-/* Make sure the container doesn't force children to stretch horizontally beyond bounds */
-.tiptap-editor-content {
-  max-width: 100%;
-  overflow-wrap: break-word;
+/* ====== LAYOUT & NAVIGATION (Restored) ====== */
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 100%;
 }
+
+.tab-pill {
+  display: inline-flex;
+  padding: 8px 10px;
+  align-items: center;
+  background: var(--surface-color);
+  border-radius: 0 0 8px 0;
+  gap: 0;
+  box-shadow: var(--shadow-sm);
+}
+
+.tab-item {
+  padding: 12px 24px;
+  border: none;
+  background: transparent;
+  font-family: inherit;
+  font-size: 1.15rem;
+  font-weight: 500;
+  cursor: pointer;
+  border-radius: 8px;
+  color: var(--text-color);
+  transition: var(--transition);
+}
+
+.tab-item.active {
+  background: #F1F5F9;
+  border-radius: 10px;
+  color: var(--accent-color);
+}
+
+.tab-item:hover:not(.active) {
+  background: #f8fafc;
+}
+
+.topbar .avatar {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: var(--surface-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  color: var(--text-color);
+  cursor: pointer;
+  margin: 16px 24px 0 0;
+  box-shadow: var(--shadow-sm);
+}
+
+.app-main {
+  padding: 24px 40px 48px;
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+/* Search bar on decks page */
+.decks-search {
+  margin-bottom: 24px;
+  position: relative;
+  max-width: 400px;
+}
+.decks-search input {
+  width: 100%;
+  padding: 14px 48px 14px 20px;
+  font-size: 1rem;
+  border: 1px solid var(--border-color);
+  background: var(--surface-color);
+  color: var(--text-color);
+  border-radius: 10px;
+  outline: none;
+}
+.decks-search svg {
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-muted);
+}
+
+/* Deck Grid */
+.deck-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 24px;
+}
+
+/* Individual Deck Card */
+.deck-card {
+  border-radius: 16px;
+  padding: 20px;
+  color: var(--text-color);
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  min-height: 160px;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.2s;
+}
+.deck-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.deck-card-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: auto;
+}
+
+.deck-card-icon {
+  width: 48px;
+  height: 48px;
+  background: rgba(255,255,255,0.4);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.deck-card-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-left: 12px;
+  flex: 1;
+  line-height: 1.2;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.deck-card-menu {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+}
+
+.deck-card-footer {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  font-weight: 500;
+  margin-top: 16px;
+  margin-bottom: 8px;
+}
+
+.deck-progress {
+  height: 6px;
+  background: rgba(255,255,255,0.3);
+  border-radius: 4px;
+  overflow: hidden;
+}
+.deck-progress-fill {
+  height: 100%;
+  background: var(--text-color);
+  border-radius: 4px;
+}
+
+.deck-card.add-new-card {
+  background: var(--surface-color) !important;
+  border: 2px dashed var(--border-color);
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  box-shadow: none;
+}
+.deck-card.add-new-card span {
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+.deck-card.add-new-card:hover {
+  border-color: var(--accent-color);
+  color: var(--accent-color);
+}
+
+/* Study / Review Mode */
+.study-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.study-review-card {
+  width: 100%;
+  background: var(--surface-color);
+  border-radius: 24px;
+  padding: 24px 32px 48px;
+  min-height: 400px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: var(--shadow-lg);
+  border: 1px solid var(--border-color);
+}
+
+.study-review-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+.study-review-header button {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 8px;
+}
+.study-review-deck-name {
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.study-review-divider {
+  width: 100%;
+  height: 4px;
+  background: var(--border-color);
+  border-radius: 2px;
+  margin-bottom: auto;
+}
+
+.study-review-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  cursor: pointer;
+  user-select: none;
+  margin-top: 32px;
+}
+
+/* Custom extracted classes */
+.community-description { color: var(--text-muted); margin-bottom: 20px; }
+.community-deck-card { display: flex; flex-direction: column; }
+.community-author-row { display: flex; align-items: center; gap: 10px; margin-bottom: 15px; }
+.community-author-avatar { width: 32px; height: 32px; border-radius: 50%; }
+.community-author-name { font-size: 14px; font-weight: 500; color: var(--text-muted); }
+.preview-modal-content { max-height: 90vh; display: flex; flex-direction: column; }
+.preview-modal-header { margin-bottom: 20px; border-bottom: 1px solid var(--border-color); padding-bottom: 15px; }
+.preview-author-row { display: flex; align-items: center; gap: 10px; margin-top: 10px; }
+.preview-cards-container { flex: 1; overflow-y: auto; margin-bottom: 20px; padding-right: 10px; }
+.preview-cards-list { display: flex; flex-direction: column; gap: 10px; margin-top: 15px; }
+.preview-card-item { padding: 15px; background: #f8fafc; border-radius: var(--radius-md); border: 1px solid var(--border-color); }
+.preview-card-label { font-weight: bold; font-size: 12px; color: var(--text-muted); margin-bottom: 8px; }
+.preview-modal-footer { display: flex; justify-content: flex-end; gap: 10px; padding-top: 15px; border-top: 1px solid var(--border-color); }
+.deck-view-action-row { display: flex; align-items: center; gap: 12px; }
+.flashcard-content-wrapper { flex: 1; display: flex; align-items: center; justify-content: center; overflow: hidden; width: 100%; }
+.flashcard-text-content { width: 100%; max-height: 100%; overflow-y: auto; text-align: center; }
+.flashcard-action-row { display: flex; gap: 8px; justify-content: center; margin-top: auto; }
+

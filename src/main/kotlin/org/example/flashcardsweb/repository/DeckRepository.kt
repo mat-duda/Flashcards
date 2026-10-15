@@ -7,5 +7,6 @@ import org.springframework.stereotype.Repository
 @Repository
 interface DeckRepository : JpaRepository<Deck, Long>{
 
-
+    fun findByIsPublicTrue(): List<Deck>
+    fun findByUserId(userId: Long): List<Deck>
 }

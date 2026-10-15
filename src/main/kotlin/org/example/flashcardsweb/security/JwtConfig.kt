@@ -26,7 +26,7 @@ class JwtConfig(
                 it.requestMatchers("/api/auth/**").permitAll()
                 it.requestMatchers("/h2-console/**").permitAll()
                 it.requestMatchers("/api/uploads/{id}").permitAll()
-                it.anyRequest().permitAll()     //authenticated()                  // Everything else needs token
+                it.anyRequest().authenticated()                  // Everything else needs token
             }
             .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter::class.java)
         return http.build()

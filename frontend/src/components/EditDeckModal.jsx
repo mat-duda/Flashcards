@@ -41,7 +41,7 @@ export default function EditDeckModal({ deck, onEdited, onClose }) {
             />
           </div>
 
-          <button type="submit" className="btn-primary submit-btn" disabled={loading}>
+          <button type="submit" className="btn-primary" disabled={loading}>
             {loading ? 'Saving...' : 'Save Changes'}
           </button>
         </form>

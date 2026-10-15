@@ -8,6 +8,17 @@ export async function getAllDecks() {
   return res.json();
 }
 
+export async function getPublicDecks() {
+  const res = await fetch(`${API_BASE}/decks/public`, { headers: authHeaders() });
+  if (!res.ok) throw new Error('Failed to fetch public decks');
+  return res.json();
+}
+
+export async function cloneDeck(id){
+  const res = await fetch(`${API_BASE}/decks/${id}/clone`, {method:'Post', headers: authHeaders() });
+  if (!res.ok) throw new Error('Failed to clone deck');
+  return res.json();
+}
 export async function getDeckById(id) {
   const res = await fetch(`${API_BASE}/decks/${id}`, { headers: authHeaders() });
   if (!res.ok) throw new Error('Failed to fetch deck');

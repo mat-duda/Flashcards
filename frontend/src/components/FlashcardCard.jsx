@@ -8,10 +8,9 @@ export default function FlashcardCard({ flashcard, onEdit, onDelete }) {
       <div className="flashcard-inner">
         <div className="flashcard-front">
           <span className="card-label">FRONT</span>
-          <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden', width: '100%' }}>
+          <div className="flashcard-content-wrapper">
             <div 
-              className="tiptap-editor-content" 
-              style={{ width: '100%', maxHeight: '100%', overflowY: 'auto', textAlign: 'center' }}
+              className="tiptap-editor-content flashcard-text-content" 
               dangerouslySetInnerHTML={{ __html: flashcard.frontText }} 
             />
           </div>
@@ -19,14 +18,13 @@ export default function FlashcardCard({ flashcard, onEdit, onDelete }) {
         </div>
         <div className="flashcard-back">
           <span className="card-label">BACK</span>
-          <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden', width: '100%' }}>
+          <div className="flashcard-content-wrapper">
             <div 
-              className="tiptap-editor-content" 
-              style={{ width: '100%', maxHeight: '100%', overflowY: 'auto', textAlign: 'center' }}
+              className="tiptap-editor-content flashcard-text-content" 
               dangerouslySetInnerHTML={{ __html: flashcard.backText }} 
             />
           </div>
-          <div style={{ display: 'flex', gap: '8px', justifyContent: 'center', marginTop: 'auto' }}>
+          <div className="flashcard-action-row">
             <button
               className="btn-secondary"
               onClick={(e) => {

@@ -9,8 +9,9 @@ import jakarta.persistence.GenerationType
 import jakarta.persistence.Id
 import jakarta.persistence.Table
 import java.sql.Date
+import kotlin.time.Instant
 
-enum class State {
+public enum class State {
     New, Learning, Review, Relearning
 }
 @Entity
@@ -27,13 +28,13 @@ data class Flashcard (
     var backText: String,
 
     @Column
-    var whenCreatedDate: Date,
+    var whenCreatedDate: java.time.Instant = java.time.Instant.now(),
 
     @Column
-    var userId: Int,
+    var userId: Long,
 
     @Column
-    var deckId: Int,
+    var deckId: Long,
 
     @Enumerated(EnumType.STRING)
     @Column(name = "state")

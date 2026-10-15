@@ -46,7 +46,7 @@ export default function EditFlashcardModal({ flashcard, userId, onEdited, onClos
             <RichTextEditor content={backText} onChange={setBackText} userId={userId} />
           </div>
 
-          <button type="submit" className="btn-primary submit-btn" disabled={loading}>
+          <button type="submit" className="btn-primary" disabled={loading}>
             {loading ? 'Saving...' : 'Save Changes'}
           </button>
         </form>

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { getAllDecks, createDeck, deleteDeck, updateDeck } from './api/deckApi';
+import { getAllDecks, createDeck, deleteDeck, updateDeck, cloneDeck } from './api/deckApi';
 import {getFlashcardsByDeckId, createFlashcard, deleteFlashcard, getCardsToStudy, updateFlashcard} from './api/flashcardApi';
 import AuthPage from './components/AuthPage';
 import DeckCard from './components/DeckCard';
@@ -8,6 +8,7 @@ import CreateDeckModal from './components/CreateDeckModal';
 import CreateFlashcardModal from './components/CreateFlashcardModal';
 import EditDeckModal from './components/EditDeckModal';
 import EditFlashcardModal from './components/EditFlashcardModal';
+import CommunityDeckPreviewModal from './components/CommunityDeckPreviewModal';
 import StudyMode from './components/StudyMode';
 import ProfilePage from './components/ProfilePage';
 import { SearchIcon, PlusCircleIcon } from './components/icons';
@@ -22,6 +23,7 @@ export default function App() {
 
   // Data state
   const [decks, setDecks] = useState([]);
+  const [publicDecks, setPublicDecks] = useState([]);
   const [flashcards, setFlashcards] = useState([]);
   const [selectedDeck, setSelectedDeck] = useState(null);
   const [cardCounts, setCardCounts] = useState({});
@@ -36,6 +38,8 @@ export default function App() {
   const [editingFlashcard, setEditingFlashcard] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [previewDeck, setPreviewDeck] = useState(null);
+  const [previewCards, setPreviewCards] = useState([]);
 
   // Load decks when user logs in
   useEffect(() => {
@@ -79,6 +83,19 @@ export default function App() {
     }
   };
 
+  const fetchPublicDecksData = async () => {
+    try {
+      setLoading(true);
+      const { getPublicDecks } = await import('./api/deckApi');
+      const data = await getPublicDecks();
+      setPublicDecks(data);
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const fetchCardCounts = async (deckList) => {
     const validDecks = deckList.filter((d) => d.id != null);
     const [counts, dues] = await Promise.all([
@@ -113,6 +130,27 @@ export default function App() {
   };
 
   // Deck actions
+  const onGoPublic = async (deck) => {
+    try {
+      await updateDeck(deck.id, { ...deck, isPublic: true });
+      if (selectedDeck?.id === deck.id) setSelectedDeck({ ...selectedDeck, isPublic: true });
+      await fetchDecks();
+    } catch (err) {
+      console.error(err);
+      alert('Failed to update visibility');
+    }
+  }
+
+  const onGoPrivate = async (deck) => {
+    try {
+      await updateDeck(deck.id, { ...deck, isPublic: false });
+      if (selectedDeck?.id === deck.id) setSelectedDeck({ ...selectedDeck, isPublic: false });
+      await fetchDecks();
+    } catch (err) {
+      console.error(err);
+      alert('Failed to update visibility');
+    }
+  }
   const handleCreateDeck = async (deck) => {
     await createDeck({ ...deck, userId: user.id });
     await fetchDecks();
@@ -128,6 +166,21 @@ export default function App() {
     setSelectedDeck(deck);
     await fetchFlashcards(deck.id);
     setView('deck');
+  };
+
+  const handleCloneDeck = async (deckId) => {
+    try {
+      setLoading(true);
+      await cloneDeck(deckId);
+      setPreviewDeck(null);
+      setPreviewCards([]);
+      await goToDecks();
+    } catch (err) {
+      console.error(err);
+      alert('Failed to clone deck');
+    } finally {
+      setLoading(false);
+    }
   };
 
   // Flashcard actions
@@ -153,11 +206,16 @@ export default function App() {
   };
 
   // Navigation
-  const goToDecks = () => {
-    setView('decks');
+  const goToDecks = async () => {
     setSelectedDeck(null);
     setFlashcards([]);
-    fetchDecks();
+    setView('decks');
+    await fetchDecks();
+  };
+
+  const goToCommunity = async () => {
+    setView('community');
+    await fetchPublicDecksData();
   };
 
   const startStudy = async () => {
@@ -192,7 +250,7 @@ export default function App() {
           >
             Decks
           </button>
-          <button className={`tab-item ${view === 'community' ? 'active' : ''}`} onClick={() => setView('community')}>
+          <button className={`tab-item ${view === 'community' ? 'active' : ''}`} onClick={goToCommunity}>
             Community
           </button>
         </div>
@@ -256,11 +314,38 @@ export default function App() {
 
         {/* COMMUNITY VIEW */}
         {view === 'community' && (
-          <div className="empty-state">
-            <div className="empty-icon">🌐</div>
-            <h3>Community coming soon</h3>
-            <p>Share and discover decks from other learners here.</p>
-            <button className="btn-secondary" onClick={goToDecks}>Back to Decks</button>
+          <div className="decks-page">
+            <h2>Community Decks</h2>
+            <p className="community-description">Discover public decks shared by other learners.</p>
+            {publicDecks.length === 0 ? (
+              <div className="empty-state">
+                <div className="empty-icon">🌐</div>
+                <h3>No public decks found</h3>
+                <p>Be the first to share a deck with the community!</p>
+              </div>
+            ) : (
+              <div className="deck-grid">
+                {publicDecks.map((publicDeckData) => (
+                  <div key={publicDeckData.deck.id} className="deck-card community-deck-card"
+                       onClick={async () => {
+                    setPreviewDeck(publicDeckData);
+                    const cards = await getFlashcardsByDeckId(publicDeckData.deck.id);
+                    setPreviewCards(cards);}}>
+                    <div className="community-author-row">
+                      <img 
+                        src={publicDeckData.authorProfilePictureUrl} 
+                        alt={publicDeckData.authorName} 
+                        className="community-author-avatar"
+                      />
+                      <span className="community-author-name">
+                        {publicDeckData.authorName}
+                      </span>
+                    </div>
+                    <h3>{publicDeckData.deck.name}</h3>
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
         )}
 
@@ -275,6 +360,8 @@ export default function App() {
               onEditDeck={() => setEditingDeck(true)}
               onEditCard={(fc) => setEditingFlashcard(fc)}
               onDeleteCard={handleDeleteFlashcard}
+              onGoPublic={onGoPublic}
+              onGoPrivate={onGoPrivate}
             />
             {flashcards.length > 0 && (
               <div style={{ textAlign: 'center', marginTop: '2rem' }}>
@@ -304,34 +391,43 @@ export default function App() {
         )}
       </main>
 
-      {/* Modals */}
+      {/* MODALS */}
       {showCreateDeck && (
-        <CreateDeckModal
-          onCreated={handleCreateDeck}
-          onClose={() => setShowCreateDeck(false)}
-        />
+        <CreateDeckModal onClose={() => setShowCreateDeck(false)} onCreated={handleCreateDeck} />
       )}
-      {showCreateCard && selectedDeck && (
+      {showCreateCard && (
         <CreateFlashcardModal
           deckId={selectedDeck.id}
           userId={user.id}
-          onCreated={handleCreateFlashcard}
           onClose={() => setShowCreateCard(false)}
+          onCreated={handleCreateFlashcard}
         />
       )}
-      {editingDeck && selectedDeck && (
+      {editingDeck && (
         <EditDeckModal
           deck={selectedDeck}
-          onEdited={handleEditDeck}
           onClose={() => setEditingDeck(false)}
+          onEdited={handleEditDeck}
         />
       )}
       {editingFlashcard && (
         <EditFlashcardModal
           flashcard={editingFlashcard}
           userId={user.id}
-          onEdited={handleEditFlashcard}
           onClose={() => setEditingFlashcard(null)}
+          onEdited={handleEditFlashcard}
+        />
+      )}
+      
+      {previewDeck && (
+        <CommunityDeckPreviewModal
+          previewDeck={previewDeck}
+          previewCards={previewCards}
+          onClose={() => {
+            setPreviewDeck(null);
+            setPreviewCards([]);
+          }}
+          onClone={handleCloneDeck}
         />
       )}
     </div>

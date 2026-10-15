@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-export default function CreateDeckModal({ onCreated, onClose }) {
+export default function CreateDeckModal({ onCreated, onClose , userId}) {
   const [name, setName] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -12,7 +12,7 @@ export default function CreateDeckModal({ onCreated, onClose }) {
     setLoading(true);
     setError(null);
     try {
-      await onCreated({ name, userId: 1 });
+      await onCreated({ name, userId: userId });
       setName('');
       onClose();
     } catch (err) {
@@ -43,7 +43,7 @@ export default function CreateDeckModal({ onCreated, onClose }) {
             />
           </div>
 
-          <button type="submit" className="btn-primary submit-btn" disabled={loading}>
+          <button type="submit" className="btn-primary" disabled={loading}>
             {loading ? 'Creating...' : 'Create Deck'}
           </button>
         </form>

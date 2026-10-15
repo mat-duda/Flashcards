@@ -19,7 +19,7 @@ export default function CreateFlashcardModal({ deckId, userId, onCreated, onClos
         backText,
         deckId,
         userId: userId,
-        whenCreatedDate: new Date().toISOString().split('T')[0],
+        whenCreatedDate: new Date().toISOString(),
       });
       setFrontText('');
       setBackText('');
@@ -50,7 +50,7 @@ export default function CreateFlashcardModal({ deckId, userId, onCreated, onClos
             <RichTextEditor content={backText} onChange={setBackText} userId={userId} />
           </div>
 
-          <button type="submit" className="btn-primary submit-btn" disabled={loading}>
+          <button type="submit" className="btn-primary" disabled={loading}>
             {loading ? 'Adding...' : 'Add Flashcard'}
           </button>
         </form>

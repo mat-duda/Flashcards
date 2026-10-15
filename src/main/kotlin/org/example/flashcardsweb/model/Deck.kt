@@ -22,6 +22,9 @@ data class Deck (
     @Column
     val userId: Long,
 
+    @Column
+    var isPublic: Boolean? = false
+
 
 
 

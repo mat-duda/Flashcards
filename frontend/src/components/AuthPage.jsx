@@ -128,7 +128,7 @@ export default function AuthPage({ onLogin }) {
                 required
               />
             </div>
-            <button type="submit" className="btn-primary submit-btn" disabled={loading}>
+            <button type="submit" className="btn-primary" disabled={loading}>
               {loading ? 'Logging in...' : 'Log In'}
             </button>
           </form>
@@ -179,7 +179,7 @@ export default function AuthPage({ onLogin }) {
                 required
               />
             </div>
-            <button type="submit" className="btn-primary submit-btn" disabled={loading}>
+            <button type="submit" className="btn-primary" disabled={loading}>
               {loading ? 'Creating account...' : 'Create Account'}
             </button>
           </form>

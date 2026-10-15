@@ -4,6 +4,7 @@ import org.example.flashcardsweb.model.Deck
 import org.example.flashcardsweb.repository.DeckRepository
 import org.example.flashcardsweb.service.DeckService
 import org.springframework.http.HttpStatus
+import org.springframework.security.core.Authentication
 import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
@@ -24,7 +25,15 @@ class DeckController(
 ) {
 
     @GetMapping
-    fun findAll(): List<Deck> = deckRepository.findAll()
+    fun findAll(authentication: org.springframework.security.core.Authentication): List<Deck> {
+        val userId = authentication.principal.toString().toLong()
+        return deckRepository.findByUserId(userId)
+    }
+
+    @GetMapping("/public")
+    fun getPublicDecks(): List<org.example.flashcardsweb.dto.CommunityDeckDTO> {
+        return deckService.getPublicDecks()
+    }
 
     @GetMapping("/{id}")
     fun getDeckById(@PathVariable("id") id: Long ) : Optional<Deck> = deckRepository.findById(id)
@@ -34,8 +43,15 @@ class DeckController(
     fun create(@RequestBody deck: Deck): Deck = deckService.createDeck(deck)
 
     @PutMapping("/{id}")
-    fun editDeckName(@PathVariable id: Long, @RequestBody updatedDeck: Deck):Deck {
-        return deckService.editDeckNameById(id,updatedDeck.name)
+    fun updateDeck(@PathVariable id: Long, @RequestBody updatedDeck: Deck): Deck {
+        return deckService.updateDeck(id, updatedDeck)
+    }
+
+
+    @PostMapping("/{id}/clone")
+    fun cloneDeck(@PathVariable id: Long, authentication: Authentication): Deck {
+        val userId = authentication.principal.toString().toLong()
+        return deckService.clonePublicDeck(id,userId)!!
     }
 
     @DeleteMapping("/{id}")

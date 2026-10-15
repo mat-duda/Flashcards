@@ -1,11 +1,11 @@
 import { ArmchairIcon, BanknoteIcon, BeefIcon, CatIcon, CrownIcon, EllipsisIcon } from './icons';
 
 const PALETTE = [
-  { bg: '#94A3B8', Icon: ArmchairIcon },
-  { bg: '#D6D3D1', Icon: BanknoteIcon },
-  { bg: '#78716C', Icon: BeefIcon },
-  { bg: '#FDE047', Icon: CatIcon },
-  { bg: '#99F6E4', Icon: CrownIcon },
+  { bg: '#99F6E4', Icon: ArmchairIcon },
+  { bg: '#C7D2FE', Icon: BanknoteIcon },
+  { bg: '#FDE68A', Icon: BeefIcon },
+  { bg: '#FBCFE8', Icon: CatIcon },
+  { bg: '#BBF7D0', Icon: CrownIcon },
 ];
 
 export default function DeckCard({ deck, index, cardCount, dueCount, onClick, onDelete }) {

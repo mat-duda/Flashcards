@@ -1,4 +1,4 @@
-package org.example.flashcardsweb
+package org.example.flashcardsweb.dto
 
 data class RegisterRequest(
     val name: String,
