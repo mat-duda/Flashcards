@@ -26,6 +26,9 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("tools.jackson.module:jackson-module-kotlin")
 
+    testRuntimeOnly("com.h2database:h2")
+    testImplementation("org.springframework.security:spring-security-test")
+
     implementation("org.springframework.boot:spring-boot-starter-security")
 
     implementation("io.jsonwebtoken:jjwt-api:0.12.6")

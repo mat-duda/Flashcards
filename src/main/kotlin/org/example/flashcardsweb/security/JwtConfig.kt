@@ -24,7 +24,6 @@ class JwtConfig(
             }
             .authorizeHttpRequests {
                 it.requestMatchers("/api/auth/**").permitAll()
-                it.requestMatchers("/h2-console/**").permitAll()
                 it.requestMatchers("/api/uploads/{id}").permitAll()
                 it.anyRequest().authenticated()                  // Everything else needs token
             }

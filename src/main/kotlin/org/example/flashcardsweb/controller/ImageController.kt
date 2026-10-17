@@ -6,6 +6,7 @@ import org.springframework.http.CacheControl
 import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType
 import org.springframework.http.ResponseEntity
+import org.springframework.security.core.Authentication
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
@@ -23,20 +24,22 @@ class ImageController(private val imageRepository: ImageRepository) {
     @PostMapping
     fun upload(
         @RequestParam("file") file: MultipartFile,
-        @RequestParam("userId") userId: Long
+        authentication: Authentication
     ): Map<String, Any> {
+        val me = authentication.principal.toString().toLong()
+
         if (file.size > 5 * 1024 * 1024) throw ResponseStatusException(
             HttpStatus.BAD_REQUEST,
             "File too large (max 5MB)"
         )
-        if (!file.contentType?.startsWith("image/")!!) throw ResponseStatusException(HttpStatus.BAD_REQUEST, "Only images allowed")
+        if (file.contentType?.startsWith("image/")!=true) throw ResponseStatusException(HttpStatus.BAD_REQUEST, "Only images allowed")
 
         val image = imageRepository.save(
             Image(
                 filename = file.originalFilename ?: "upload",
                 contentType = file.contentType!!,
                 data = file.bytes,
-                userId = userId
+                userId = me
             )
         )
 

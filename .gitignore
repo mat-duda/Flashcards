@@ -52,6 +52,7 @@ node_modules/
 ### Frontend build output & cache ###
 frontend/dist/
 frontend/.vite/
+frontend/.env
 
 ### H2 database files ###
 *.mv.db

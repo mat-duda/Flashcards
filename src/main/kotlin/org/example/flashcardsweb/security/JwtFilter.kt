@@ -30,7 +30,9 @@ class JwtFilter(
 
                 SecurityContextHolder.getContext().authentication = authentication
 
-            } catch (_: Exception) {
+            } catch (e: Exception) {
+
+                logger.debug("Invalid JWT: ${e.message}")
 
             }
 

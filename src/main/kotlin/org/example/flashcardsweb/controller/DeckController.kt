@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.ResponseStatus
 import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.server.ResponseStatusException
 import java.util.Optional
 
 
@@ -21,7 +22,8 @@ import java.util.Optional
 @RequestMapping("/api/decks")
 class DeckController(
     private val deckRepository: DeckRepository,
-    private val deckService: DeckService
+    private val deckService: DeckService,
+
 ) {
 
     @GetMapping
@@ -36,14 +38,28 @@ class DeckController(
     }
 
     @GetMapping("/{id}")
-    fun getDeckById(@PathVariable("id") id: Long ) : Optional<Deck> = deckRepository.findById(id)
-
+    fun getDeckById(@PathVariable id: Long, authentication: Authentication): Deck {
+        val me = authentication.principal.toString().toLong()
+        val deck = deckRepository.findById(id).orElse(null)
+        if (deck == null || (deck.userId != me && deck.isPublic != true)) {
+            throw ResponseStatusException(HttpStatus.NOT_FOUND)
+        }
+        return deck
+    }
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    fun create(@RequestBody deck: Deck): Deck = deckService.createDeck(deck)
-
+    fun create(@RequestBody deck: Deck, authentication: Authentication): Deck {
+        val me = authentication.principal.toString().toLong()
+        val newDeck = Deck(name = deck.name, userId = me, isPublic = deck.isPublic ?: false)
+        return deckService.createDeck(newDeck)
+    }
     @PutMapping("/{id}")
-    fun updateDeck(@PathVariable id: Long, @RequestBody updatedDeck: Deck): Deck {
+    fun updateDeck(@PathVariable id: Long, @RequestBody updatedDeck: Deck, authentication: Authentication): Deck {
+        val me = authentication.principal.toString().toLong()
+        val deck = deckRepository.findById(id).orElse(null)
+        if (deck == null || deck.userId != me) {
+            throw ResponseStatusException(HttpStatus.NOT_FOUND)
+        }
         return deckService.updateDeck(id, updatedDeck)
     }
 
@@ -56,8 +72,14 @@ class DeckController(
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    fun delete(@PathVariable id: Long) = deckService.deleteDeckById(id)
-
+    fun delete(@PathVariable id: Long, authentication: Authentication) {
+        val me = authentication.principal.toString().toLong()
+        val deck = deckRepository.findById(id).orElse(null)
+        if (deck == null || deck.userId != me) {
+            throw ResponseStatusException(HttpStatus.NOT_FOUND)
+        }
+        deckService.deleteDeckById(id)
+    }
 
 
 }
