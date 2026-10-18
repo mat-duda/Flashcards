@@ -46,7 +46,7 @@ class FlashcardController(
                 ): Flashcard {
         val myself = authentication.principal.toString().toLong()
 
-        val flashcard = flashcardService.getFlashcardById(myself)
+        val flashcard = flashcardService.getFlashcardById(id)
         if (flashcard.userId != myself){
             throw ResponseStatusException(HttpStatus.NOT_FOUND)
         }
@@ -83,6 +83,7 @@ class FlashcardController(
         if (card.userId != me) {
             throw ResponseStatusException(HttpStatus.NOT_FOUND)
         }
+        flashcardService.deleteFlashcardById(id)
     }
 
     @GetMapping("/deck/{deckId}")
