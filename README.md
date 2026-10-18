@@ -12,7 +12,7 @@ A full-stack spaced-repetition flashcard app. It schedules your reviews with the
 ## Features
 
 - **Smart scheduling with FSRS:** each review updates the card's stability and difficulty, and the next review date is calculated from them
-- **Four-button rating:** Again / Hard / Good / Easy, like Anki
+- **Four-button rating:** Bad / Hard / Good / Perfect, like Anki
 - **Rich-text cards:** formatting, lists, code and images with a TipTap editor
 - **Community decks:** publish your deck, browse other people's decks, preview them and clone them into your account
 - **Secure accounts:** email + password (BCrypt) or Google sign-in, stateless JWT authentication, users can only access their own data
@@ -64,7 +64,7 @@ A full-stack spaced-repetition flashcard app. It schedules your reviews with the
 | Scheduling | [FSRS](https://github.com/open-spaced-repetition) (open-spaced-repetition Java library) |
 | Database | PostgreSQL 15 (Docker Compose) |
 | Frontend | React 19, Vite 6, TipTap 3 |
-| Testing / CI | JUnit 5, Mockito, H2, GitHub Actions |
+| Testing / CI | JUnit 5, Mockito, GitHub Actions |
 
 
 ## How spaced repetition works here
@@ -79,7 +79,7 @@ Every card stores its FSRS memory state:
 | `difficulty` | How hard the card is for you |
 | `step`, `lastReview` | Learning step and time of the last review |
 
-When you rate a card (1 = Again, 2 = Hard, 3 = Good, 4 = Easy), the backend runs the FSRS scheduler and saves the new values. A study session loads only cards with `due <= now`, ordered by due date.
+When you rate a card (1 = Bad, 2 = Hard, 3 = Good, 4 = Perfect), the backend runs the FSRS scheduler and saves the new values. A study session loads only cards with `due <= now`, ordered by due date.
 
 ## Key engineering decisions
 
@@ -166,7 +166,6 @@ All endpoints except `/api/auth/**` require `Authorization: Bearer <token>`.
 ```
 
 - **Unit tests** for the FSRS scheduling logic
-- **Integration tests** (Mockito + H2) for authentication and access control.
 
 ## Project structure
 
